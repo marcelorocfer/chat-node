@@ -11,11 +11,11 @@
         
     </div>
     <br>
-    <input type="text" name="" id="msg">
+    <input type="text" id="msg">
     <br>
-    <input type="text" name="" id="user_name" placeholder="Nome de Usuário">
+    <input type="text" id="user_name" placeholder="Nome de Usuário">
     <br>
-    <button>Enviar</button>
+    <button onclick="enviar()">Enviar</button>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
 <script>
@@ -23,5 +23,14 @@
     socket.on("disconnect", () => {
         console.log("Desconectado!");
     });
+    function enviar() {
+        let msgField = document.getElementById("msg");
+        let userNameField = document.getElementById("user_name");
+
+        let msg = msgField.value;
+        let user_name = userNameField.value;
+
+        socket.emit("msg", { msg, user_name })
+    }
 </script>
 </html>
