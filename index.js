@@ -3,10 +3,15 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
     socket.on("disconnect", () => {
-        console.log(`${socket.id} desconectou`);
-    })
+        console.log("desconectou" + socket.id);
+    });
+
+    socket.on("msg", (data) => {
+        socket.emit("showmsg", data);
+        console.log(data);
+    });
 });
 
 app.set("view engine", "ejs");

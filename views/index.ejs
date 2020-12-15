@@ -7,9 +7,7 @@
 </head>
 <body>
     <h1>Chat Node Socket.io</h1>
-    <div id="chat">
-        
-    </div>
+    <div id="chat"></div>
     <br>
     <input type="text" id="msg">
     <br>
@@ -17,7 +15,7 @@
     <br>
     <button onclick="enviar()">Enviar</button>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script>
     let socket = io("http://localhost:3000");
     socket.on("disconnect", () => {
@@ -30,7 +28,7 @@
         let msg = msgField.value;
         let user_name = userNameField.value;
 
-        socket.emit("msg", { msg, user_name })
+        socket.emit("msg", { msg: msg, user_name: user_name });
     }
 </script>
 </html>
