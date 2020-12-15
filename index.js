@@ -3,13 +3,13 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-io.on("connection", (socket) => {
+io.on("connection", socket => {
     socket.on("disconnect", () => {
-        console.log("desconectou" + socket.id);
+        console.log(`${socket.id} desconectou`);
     });
 
-    socket.on("msg", (data) => {
-        socket.emit("showmsg", data);
+    socket.on("msg", data => {
+        socket.emit("show_msg", data);
         console.log(data);
     });
 });

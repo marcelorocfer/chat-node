@@ -7,20 +7,29 @@
 </head>
 <body>
     <h1>Chat Node Socket.io</h1>
-    <div id="chat"></div>
-    <br>
     <input type="text" id="msg">
     <br>
     <input type="text" id="user_name" placeholder="Nome de Usuário">
     <br>
     <button onclick="enviar()">Enviar</button>
+    <br>
+    <div id="chat"></div>
+    <br>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
 <script>
     let socket = io("http://localhost:3000");
     socket.on("disconnect", () => {
         console.log("Desconectado!");
     });
+
+    socket.on("show_msg", data => {
+        console.log(data);
+        let chat = document.getElementById("chat");
+        let p = document.createElement("p");
+        p.innerHTML = `${data.user_name}: ${data.msg}`;
+        chat.append(p);
+    })
     function enviar() {
         let msgField = document.getElementById("msg");
         let userNameField = document.getElementById("user_name");
